@@ -1,30 +1,27 @@
 # JurnalKu API – Laravel REST API
 
 REST API sederhana berbasis **Laravel** untuk mengelola data user/siswa.  
-API ini digunakan sebagai backend untuk aplikasi Flutter dan berfokus pada operasi **CRUD User**.
+API ini digunakan sebagai backend aplikasi Flutter dan berfokus pada operasi **CRUD User**.
 
-> ⚠️ API ini **belum menggunakan autentikasi (public API)** dan ditujukan untuk kebutuhan pembelajaran, tugas sekolah, atau prototype aplikasi.
+> ⚠️ API ini **belum menggunakan autentikasi (public API)** dan ditujukan untuk pembelajaran, tugas sekolah, atau prototype aplikasi.
 
 ---
 
 ## 🚀 Tech Stack
-
 - Laravel
 - PHP
 - MySQL
 - RESTful API (JSON)
-- HTTP Client (Flutter)
+- Flutter HTTP Client
 
 ---
 
 ## 🌐 Base URL
 http://127.0.0.1:8000/api
 
-
 ---
 
 ## 📌 Fitur API
-
 - Menampilkan seluruh user
 - Menampilkan detail user berdasarkan ID
 - Menambahkan user baru
@@ -43,8 +40,8 @@ http://127.0.0.1:8000/api
 | nis | integer | Nomor Induk Siswa |
 | rombel | string | Rombel |
 | rayon | string | Rayon |
-| image | string \| null | URL foto profil |
-| grade | enum | `X`, `XI`, `XII` |
+| image | string \| null | Foto profil |
+| grade | enum | X, XI, XII |
 | created_at | timestamp | Waktu dibuat |
 | updated_at | timestamp | Waktu diperbarui |
 
@@ -52,11 +49,10 @@ http://127.0.0.1:8000/api
 
 ## 🔹 Get All Users
 
-**Endpoint**
+Endpoint  
+GET /users
 
-🔹GET /users
-
-**Response 200**
+Response 200
 ```json
 [
   {
@@ -70,13 +66,17 @@ http://127.0.0.1:8000/api
     "grade": "XII"
   }
 ]
+```
 
-🔹Get User By ID
+---
 
-Endpoint
+## 🔹 Get User By ID
+
+Endpoint  
 GET /users/{id}
 
 Response 200
+```json
 {
   "id": 1,
   "name": "Syahputra Winata",
@@ -87,18 +87,24 @@ Response 200
   "image": null,
   "grade": "XII"
 }
+```
 
 Response 404
+```json
 {
   "message": "Not Found"
 }
+```
 
-🔹Create User
+---
 
-Endpoint
+## 🔹 Create User
+
+Endpoint  
 POST /users
 
 Request Body (JSON)
+```json
 {
   "name": "Putra",
   "email": "putra@mail.com",
@@ -109,8 +115,10 @@ Request Body (JSON)
   "image": "https://example.com/photo.jpg",
   "grade": "XII"
 }
+```
 
 Response 201
+```json
 {
   "id": 1,
   "name": "Putra",
@@ -121,27 +129,35 @@ Response 201
   "image": null,
   "grade": "XII"
 }
+```
 
 Response 422
+```json
 {
   "errors": {
     "email": ["The email has already been taken."]
   }
 }
+```
 
-Update User
+---
 
-Endpoint
-PUT /users/{id}
+## 🔹 Update User
+
+Endpoint  
+PUT /users/{id}  
 PATCH /users/{id}
 
 Request Body (JSON)
+```json
 {
   "rombel": "PPLG XII-5",
   "rayon": "Cic 9"
 }
+```
 
 Response 200
+```json
 {
   "id": 1,
   "name": "Putra",
@@ -149,11 +165,31 @@ Response 200
   "rombel": "PPLG XII-5",
   "rayon": "Cic 9"
 }
+```
 
-Delete User
-Endpoint
+---
+
+## 🔹 Delete User
+
+Endpoint  
 DELETE /users/{id}
+
 Response 200
+```json
 {
   "message": "deleted"
 }
+```
+
+---
+
+## 📌 Catatan
+- API belum memiliki fitur login
+- Semua endpoint bersifat public
+- Pemilihan user dilakukan manual di frontend (by ID)
+- Cocok untuk tugas sekolah & integrasi Flutter
+
+---
+
+## 📄 License
+Free for educational use.
